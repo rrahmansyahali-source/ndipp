@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Diva 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+overflow:hidden;
+color:white;
+background:black;
+}
+
+/* Opening */
+#opening{
+height:100vh;
+background:linear-gradient(135deg,#ff4e8a,#ff9a9e);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+#opening button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+background:white;
+color:#ff4e8a;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* Password */
+#passwordPage{
+display:none;
+height:100vh;
+background:#111;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+#passwordPage input{
+padding:10px;
+border-radius:20px;
+border:none;
+margin:10px 0;
+}
+
+/* Main */
+#main{
+display:none;
+overflow:auto;
+height:100vh;
+position:relative;
+}
+
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:url('foto1.jpg') center/cover no-repeat;
+filter:blur(12px);
+z-index:-2;
+}
+
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:-1;
+}
+
+.container{
+padding:80px 20px;
+text-align:center;
+animation:fadeIn 2s ease;
+}
+
+h1{
+font-size:40px;
+margin-bottom:15px;
+}
+
+.typing{
+font-size:20px;
+margin-bottom:30px;
+color:#ffccd9;
+}
+
+.gallery{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-bottom:40px;
+}
+
+.gallery img{
+width:250px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,0.6);
+transition:0.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.1);
+}
+
+.timeline{
+max-width:600px;
+margin:auto;
+text-align:left;
+line-height:1.8;
+}
+
+.timeline div{
+margin-bottom:20px;
+padding:15px;
+background:rgba(255,255,255,0.1);
+border-radius:15px;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0) scale(0);opacity:1;}
+100%{transform:translateY(-100vh) scale(1.5);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Opening -->
+<div id="opening">
+<h1>💌 Hai Diva 💌</h1>
+<p>Ada sesuatu untuk kamu...</p>
+<button onclick="goPassword()">Klik Untuk Buka 💖</button>
+</div>
+
+<!-- Password -->
+<div id="passwordPage">
+<h2>Masukkan Password 💕</h2>
+<input type="password" id="pass" placeholder="Password cinta">
+<button onclick="checkPass()">Masuk</button>
+</div>
+
+<!-- Main -->
+<div id="main">
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<div class="container">
+<h1>Aku Sayang Kamu 💖</h1>
+<div class="typing" id="typing"></div>
+
+<div class="gallery">
+<img src="d:\ndipp\webcam-toy-photo25.jpg">
+<img src="d:\ndipp\webcam-toy-photo19.jpg">
+</div>
+
+<h2>Kenangan Kita ✨</h2>
+
+<div class="timeline">
+<div>💞 Pertama kali kita ketemu, aku gak nyangka kamu bakal jadi segalanya.</div>
+<div>🌸 Hari pertama kita ngobrol lama banget dan rasanya nyaman banget.</div>
+<div>📸 Foto-foto ini jadi saksi kebahagiaan kita.</div>
+<div>💍 Dan aku harap ini bukan akhir… tapi awal selamanya.</div>
+</div>
+
+</div>
+</div>
+
+<!-- Musik -->
+<audio id="music" loop>
+<source src="d:\ndipp\Janji Suci Cover Saxophone - Yovie And Nuno - Ardan RF.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function goPassword(){
+document.getElementById("opening").style.display="none";
+document.getElementById("passwordPage").style.display="flex";
+}
+
+function checkPass(){
+const password="140925";
+
+if(document.getElementById("pass").value===password){
+document.getElementById("passwordPage").style.display="none";
+document.getElementById("main").style.display="block";
+startMusic();
+typingEffect();
+}else{
+alert("Password salah sayangkuu 😢");
+}
+}
+
+function startMusic(){
+const music=document.getElementById("music");
+music.volume=0;
+music.play();
+
+let fade=setInterval(()=>{
+if(music.volume<0.4){
+music.volume+=0.02;
+}else{
+clearInterval(fade);
+}
+},200);
+}
+
+const text="Diva 💕 Kamu adalah rumah dan bahagiaku.";
+let i=0;
+
+function typingEffect(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typingEffect,70);
+}
+}
+
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*25+15+"px";
+heart.style.animationDuration=Math.random()*3+3+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+}
+
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
